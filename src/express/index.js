@@ -3,10 +3,13 @@ const assignRequestId = require("./middlewares/assignRequestId");
 const getLogger = require("./middlewares/logger");
 const handleError = require("./middlewares/handleerror");
 
-routers = require("./routes");
+const routers = require("./routes");
+const setupMongoConnection = require("../modules/common/utils/setupMongoConnection");
 
 const app = express();
 app.use(express.json());
+// x-www-form-urlencoded
+//app.use(express.urlencoded({ extended: true }));
 
 app.use(assignRequestId);
 
@@ -22,7 +25,12 @@ app.get("/health", (req, res) => {
 
 app.use(handleError);
 
+// const PORT = 3000;
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}`);
+// });
 const PORT = 3000;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  await setupMongoConnection();
   console.log(`Server is running on port ${PORT}`);
 });
