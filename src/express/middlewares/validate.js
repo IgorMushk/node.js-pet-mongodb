@@ -19,18 +19,4 @@ const validate = (schema) => async (req, res, next) => {
   }
 };
 
-
-// const validate = (schema) => async (req, res, next) => {
-//     try {
-//         //const value = await schema.validateAsync(req);
-//         const value = await schema.validateAsync(req.body);
-//         //console.log(value);
-//         next();
-//     }
-//     catch (err) { 
-//         next(err);
-//     }
-// };
-
-
 module.exports = validate;

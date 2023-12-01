@@ -6,22 +6,15 @@ class AnimalController {
   }
   getAnimalById = async (req, res, next) => {
     const { animalId } = req.params;
-    //res.json({message: `Get animal with id ${animalId}`});
-    // try {
-      //throw new Error('dsd'); // test
-      const animal = await this.animalsService.getOneById(animalId);
+    const animal = await this.animalsService.getOneById(animalId);
       res.json({
         status: 200,
         message: "Successfully retrieved animal",
         data: animal,
       });
-    // } catch (error) {
-    //   next(error);
-    // }
   };
 
   getAnimals = async (req, res) => {
-    //res.json({message: 'Get animals'});
     const animals = await this.animalsService.getAll();
     res.json({
       status: 200,
@@ -31,8 +24,6 @@ class AnimalController {
   };
 
   createAnimal = async (req, res) => {
-    //res.json({message: 'Create animal'});
-    //console.log('req.body', req.body);
     const animal = await this.animalsService.create(req.body);
     res.json({
       status: 201,
@@ -43,7 +34,6 @@ class AnimalController {
 
   updateAnimal = async (req, res) => {
     const { animalId } = req.params;
-    //res.json({ message: `Update animal with id ${animalId}` });
     const { body } = req;
 
     const animal = await this.animalsService.updateById(animalId, body);
@@ -67,9 +57,6 @@ class AnimalController {
 
 }
 
-
-
-//const animalController = new AnimalController;
 const animalController = new AnimalController(animalsService);
 
 module.exports = animalController;

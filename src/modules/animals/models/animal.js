@@ -14,14 +14,3 @@ class Animal {
 }
 
 module.exports = Animal;
-
-// Animals
-
-// id (generated)
-// createdAt (timestamp)
-// updatedAt (timestamp)
-// name (string)
-// age (number)
-// isVaccinated (boolean)
-// gender ('male' | 'female')
-// species (string)
