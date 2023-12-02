@@ -1,5 +1,6 @@
 const path = require('node:path');
 const fs = require('node:fs/promises');
+const Animal = require("../models/animal");
 
 class AnimalRepository {
     dbPath = path.join(process.cwd(), 'db.json')
@@ -26,10 +27,10 @@ class AnimalRepository {
         return animal;
     }
 
-    async create(animal) {
-        const db = await this.readDB();
-        db.animals.push(animal);
-        await this.writeDB(db);
+    async create(payload) {
+        const animal = new Animal(payload);
+        //console.log('animal : ', animal);
+        await animal.save();
         return animal;
     }
 

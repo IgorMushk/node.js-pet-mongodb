@@ -14,14 +14,17 @@ const {Schema, default: mongoose} = require("mongoose");
 //     }
 // }
 
+// module.exports = AnimalOld;
+
 const animalSchema = new Schema({
   name: String,
   age: Number,
   isVaccinated: {type: Boolean, default: false},
   gender: {type: String, enum: ["male", "famaile"]},
   species: String,
-}, {versionKey: false, timestamps: true})
+}, {versionKey: false, timestamps: true},)
 
 const Animal = mongoose.model("animals", animalSchema);
 
-// module.exports = AnimalOld;
+module.exports = Animal;
+

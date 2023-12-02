@@ -17,6 +17,7 @@ app.use(getLogger());
 
 //app.use('/animals',  router);
 app.use(routers);
+//app.use('/api/v1',routers);
 
 app.get("/health", (req, res) => {
   res.setHeader("x-request-id", req.id);

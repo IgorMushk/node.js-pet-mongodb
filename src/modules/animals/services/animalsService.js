@@ -22,8 +22,8 @@ class AnimalsService {
         }
 
     async create(payload) {
-        const animal = new Animal(payload);
-        return await this.animalRepository.create(animal);
+      //console.log('payload : ', payload);
+      return await this.animalRepository.create(payload);
     }
     
     async updateById(id, payload) {
