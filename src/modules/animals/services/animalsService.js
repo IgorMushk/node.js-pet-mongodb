@@ -1,5 +1,5 @@
 const HttpError = require("../../common/models/HttpError");
-const Animal = require("../models/animal");
+// const Animal = require("../models/animal");
 const animalRepository = require("../repositories/animalsREpository");
 
 class AnimalsService {
@@ -8,9 +8,9 @@ class AnimalsService {
     }
 
     // описываем интерфейс
-    async getAll() {
+    async getAll(config) {
        // a lot of logic 
-       return await this.animalRepository.findAll();
+       return await this.animalRepository.findAll(config);
     }
 
     async getOneById(id) {

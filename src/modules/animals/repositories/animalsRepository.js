@@ -1,24 +1,28 @@
-const path = require('node:path');
-const fs = require('node:fs/promises');
+// const path = require('node:path');
+// const fs = require('node:fs/promises');
 const Animal = require("../models/animal");
 
 class AnimalRepository {
-    dbPath = path.join(process.cwd(), 'db.json')
+    // dbPath = path.join(process.cwd(), 'db.json')
     
-    async readDB(){
-        const content = await fs.readFile(this.dbPath);
-        const entries = JSON.parse(content.toString());
-        return entries;
-    }
+    // async readDB(){
+    //     const content = await fs.readFile(this.dbPath);
+    //     const entries = JSON.parse(content.toString());
+    //     return entries;
+    // }
 
-    async writeDB(db){
-        const content = JSON.stringify(db, null, 2);
-        await fs.writeFile(this.dbPath,content);
-    }
+    // async writeDB(db){
+    //     const content = JSON.stringify(db, null, 2);
+    //     await fs.writeFile(this.dbPath,content);
+    // }
     
-    async findAll() {
-        const animals = await Animal.find();
-        return animals;    
+    async findAll(config) {
+      const {page, limit} = config;
+        const skip = (page - 1) * limit
+        //console.log(config);
+        const animals = await Animal.find().skip(skip).limit(limit);
+        const count = await Animal.countDocuments();
+        return {animals, count};    
     }
 
     async findOneById(animalId) {

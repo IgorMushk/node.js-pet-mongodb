@@ -15,11 +15,15 @@ class AnimalController {
   };
 
   getAnimals = async (req, res) => {
-    const animals = await this.animalsService.getAll();
+    const {limit = 5,page = 1} = req.query;
+    const {animals, count} = await this.animalsService.getAll({
+      limit: +limit, // parseInt(limit)
+      page: +page,   // parseInt(page)
+    });
     res.json({
       status: 200,
       message: "Successfully retrieved all animals",
-      data: animals,
+      data: {animals, count, limit: parseInt(limit), page: parseInt(page)},
     });
   };
 
