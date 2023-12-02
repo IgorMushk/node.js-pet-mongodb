@@ -22,8 +22,8 @@ class AnimalRepository {
     }
 
     async findOneById(animalId) {
-        const db = await this.readDB();
-        const animal = db.animals.find(({id}) => id === animalId);
+      //console.log('animalId', animalId);
+        const animal = await Animal.findById(animalId);
         return animal;
     }
 

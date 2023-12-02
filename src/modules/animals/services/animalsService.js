@@ -15,6 +15,7 @@ class AnimalsService {
 
     async getOneById(id) {
         const animal = await this.animalRepository.findOneById(id);
+        //console.log('animal',animal);
         if (!animal) {
           throw new HttpError(404, 'Animal is not found');
         }   

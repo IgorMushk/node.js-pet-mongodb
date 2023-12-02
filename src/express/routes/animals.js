@@ -9,11 +9,11 @@ const router = express.Router();
 
 router.get('/', errorWrapper(animalController.getAnimals));
 
-router.get('/:animalId', validate(updateAnimalSchema), errorWrapper(animalController.getAnimalById));
+router.get('/:animalId', errorWrapper(animalController.getAnimalById));
 
 router.post('/', validate(createAnimalSchema), errorWrapper(animalController.createAnimal));
 
-router.put('/:animalId', errorWrapper(animalController.updateAnimal));
+router.put('/:animalId', validate(updateAnimalSchema), errorWrapper(animalController.updateAnimal));
 
 router.delete('/:animalId', errorWrapper(animalController.deleteAnimal));
 
