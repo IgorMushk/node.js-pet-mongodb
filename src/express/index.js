@@ -29,8 +29,17 @@ app.use(handleError);
 // app.listen(PORT, () => {
 //   console.log(`Server is running on port ${PORT}`);
 // });
+// - 1 - 
+// const PORT = 3000;
+// app.listen(PORT, async () => {
+//   await setupMongoConnection();
+//   console.log(`Server is running on port ${PORT}`);
+// });
+// - 2 - 
 const PORT = 3000;
-app.listen(PORT, async () => {
-  await setupMongoConnection();
+setupMongoConnection().then(() =>
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});
+}),
+);
+
