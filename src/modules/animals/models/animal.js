@@ -17,11 +17,11 @@ const {Schema, default: mongoose} = require("mongoose");
 // module.exports = AnimalOld;
 
 const animalSchema = new Schema({
-  name: String,
-  age: Number,
+  name: { type: String, require: true} ,
+  age: { type: Number, require: true},
   isVaccinated: {type: Boolean, default: false},
-  gender: {type: String, enum: ["male", "famaile"]},
-  species: String,
+  gender: {type: String, enum: ["male", "famaile"], require: true},
+  species: {type: String, require: true},
 }, {versionKey: false, timestamps: true},)
 
 const Animal = mongoose.model("animals", animalSchema);

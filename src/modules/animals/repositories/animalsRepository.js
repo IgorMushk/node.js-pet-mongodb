@@ -17,8 +17,8 @@ class AnimalRepository {
     }
     
     async findAll() {
-        const db = await this.readDB();
-        return db.animals;    
+        const animals = await Animal.find();
+        return animals;    
     }
 
     async findOneById(animalId) {
@@ -36,21 +36,11 @@ class AnimalRepository {
 
     async updateById(animalId, payload) {
         const animal = await this.findOneById(animalId);
+        // console.log(animal);
         if (!animal) {
           return;
         }
-    
-        const db = await this.readDB();
-        const animalIndex = db.animals.findIndex(({ id }) => id === animalId);
-    
-        const updatedAnimal = {
-          ...db.animals[animalIndex],
-          ...payload,
-          updatedAt: new Date().toISOString(),
-        };
-    
-        db.animals[animalIndex] = updatedAnimal;
-        await this.writeDB(db);
+        const updatedAnimal = await Animal.findByIdAndUpdate(animalId, payload, {returnOriginal: false})
         return updatedAnimal;
       }
     
