@@ -17,11 +17,19 @@ class AnimalRepository {
     // }
     
     async findAll(config) {
-      const {page, limit} = config;
+      const {page, limit, isVaccinated} = config;
         const skip = (page - 1) * limit
         //console.log(config);
-        const animals = await Animal.find().where('deletedAt').equals(null).skip(skip).limit(limit);
-        const count = await Animal.countDocuments().where('deletedAt').equals(null);
+
+        const animalsQuery = Animal.find().where('deletedAt').equals(null).skip(skip).limit(limit);
+        const countQuery = Animal.countDocuments().where('deletedAt').equals(null);
+        if (isVaccinated) {
+          animalsQuery.where('isVaccinated').equals(isVaccinated);
+          countQuery.where('isVaccinated').equals(isVaccinated);
+        }
+
+        const animals = await animalsQuery.exec();
+        const count = await countQuery.exec();
         return {animals, count};    
     }
 

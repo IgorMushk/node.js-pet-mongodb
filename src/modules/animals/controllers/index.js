@@ -15,11 +15,17 @@ class AnimalController {
   };
 
   getAnimals = async (req, res) => {
-    const {limit = 5,page = 1} = req.query;
-    const {animals, count} = await this.animalsService.getAll({
-      limit: +limit, // parseInt(limit)
-      page: +page,   // parseInt(page)
-    });
+    const {limit = 5, page = 1, isVaccinated} = req.query;
+    const config = {
+      limit: parseInt(limit),
+      page: parseInt(page),
+    }
+
+    if (isVaccinated) {
+      config.isVaccinated = Boolean(parseInt(isVaccinated));
+    }
+
+    const {animals, count} = await this.animalsService.getAll(config);
     res.json({
       status: 200,
       message: "Successfully retrieved all animals",
