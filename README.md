@@ -16,13 +16,13 @@ POST http://localhost:3000/animals/
     "species": "cat"  
 }
 #### Update animal
-PUT http://localhost:3000/animals/:id
+PUT http://localhost:3000/animals/:id  
 {  
     "name": "AnimalToRemove"  
 }  
 OR  
 {   
-    "age": 5
+    "age": 5  
 }  
 
 #### Soft delete animal
