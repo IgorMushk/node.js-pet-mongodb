@@ -29,5 +29,5 @@ OR
 DELETE http://localhost:3000/animals/:id
 
 ### SQL DB vs noSQL DB
-![Screenshoot-1](./assets/screens1.jpg)
-![Screenshoot-2](./assets/screens2.jpg)
+![Screenshoot-1](./assets/screen1.jpg)
+![Screenshoot-2](./assets/screen2.jpg)
