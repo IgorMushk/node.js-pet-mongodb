@@ -15,7 +15,7 @@ class AnimalController {
   };
 
   getAnimals = async (req, res) => {
-    const {limit = 5, page = 1, isVaccinated} = req.query;
+    const {limit = 5, page = 1, isVaccinated, sortBy, order = 'asc', minAge} = req.query;
     const config = {
       limit: parseInt(limit),
       page: parseInt(page),
@@ -24,6 +24,16 @@ class AnimalController {
     if (isVaccinated) {
       config.isVaccinated = Boolean(parseInt(isVaccinated));
     }
+
+    if (sortBy) {
+      config.sortBy = sortBy;
+      config.order = order;
+    }
+
+    if (minAge) {
+      config.minAge = parseInt(minAge);
+    }
+
 
     const {animals, count} = await this.animalsService.getAll(config);
     res.json({

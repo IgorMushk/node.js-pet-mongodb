@@ -17,7 +17,8 @@ class AnimalRepository {
     // }
     
     async findAll(config) {
-      const {page, limit, isVaccinated} = config;
+      const {page, limit, isVaccinated, sortBy, order, minAge} = config;
+      console.log(minAge)
         const skip = (page - 1) * limit
         //console.log(config);
 
@@ -26,6 +27,17 @@ class AnimalRepository {
         if (isVaccinated) {
           animalsQuery.where('isVaccinated').equals(isVaccinated);
           countQuery.where('isVaccinated').equals(isVaccinated);
+        }
+
+        if (sortBy) {
+          animalsQuery.sort({
+            [sortBy]: order,
+          })
+        }
+
+        if (minAge) {
+          animalsQuery.where('age').gte(minAge);
+          countQuery.where('age').gte(minAge);
         }
 
         const animals = await animalsQuery.exec();
