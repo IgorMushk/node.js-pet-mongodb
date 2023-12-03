@@ -22,6 +22,7 @@ const animalSchema = new Schema({
   isVaccinated: {type: Boolean, default: false},
   gender: {type: String, enum: ["male", "famaile"], require: true},
   species: {type: String, require: true},
+  deletedAt: {type: Date, default: null},
 }, {versionKey: false, timestamps: true},)
 
 const Animal = mongoose.model("animals", animalSchema);

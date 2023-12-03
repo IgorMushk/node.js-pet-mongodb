@@ -20,14 +20,14 @@ class AnimalRepository {
       const {page, limit} = config;
         const skip = (page - 1) * limit
         //console.log(config);
-        const animals = await Animal.find().skip(skip).limit(limit);
-        const count = await Animal.countDocuments();
+        const animals = await Animal.find().where('deletedAt').equals(null).skip(skip).limit(limit);
+        const count = await Animal.countDocuments().where('deletedAt').equals(null);
         return {animals, count};    
     }
 
     async findOneById(animalId) {
       //console.log('animalId', animalId);
-        const animal = await Animal.findById(animalId);
+        const animal = await Animal.findById(animalId).where('deletedAt').equals(null);
         return animal;
     }
 
@@ -53,11 +53,12 @@ class AnimalRepository {
         if (!animal) {
           return;
         }
-    
-        const db = await this.readDB();
-        const filteredAnimals = db.animals.filter(({ id }) => id !== animalId);
-        db.animals = filteredAnimals;
-        await this.writeDB(db);
+        
+        await Animal.findByIdAndUpdate(animalId, {
+          $set: {
+            deletedAt: new Date(),
+          },
+        });
         return animalId;
       }
     
